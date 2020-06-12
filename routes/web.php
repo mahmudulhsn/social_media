@@ -1,0 +1,92 @@
+<?php
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Newsfeed Routs
+Route::get('/home','newsfeedController@index');
+
+//Login & Register
+Route::get('/','loginController@index');
+Route::get('/registration','loginController@register');
+Route::get('/contact','loginController@contact');
+
+//Left Sidebars Items
+Route::get('/people_nearby','leftbarController@people_nearby');
+Route::get('/all_images','leftbarController@all_images');
+Route::get('/all_papers','leftbarController@all_papers');
+Route::get('/all_videos','leftbarController@all_videos');
+
+
+//chatroom
+Route::get('/chatroom','chatroomController@chatroom');
+
+
+//profile
+Route::get('/users/{id}','profileController@show')->name('single-user');
+Route::get('/my_profile','profileController@my_profile');
+Route::get('/about_profile','profileController@about_profile');
+Route::get('/album','profileController@album');
+Route::get('/profile_friend','profileController@profile_friend');
+Route::get('/my_repositories','profileController@my_repositories');
+Route::post('/user/profile_pic/store','loginController@store');
+
+
+//Repositories
+Route::get('/all_repositories','repositoriesController@all_repositories');
+Route::get('/new_repositories','repositoriesController@new_repositories');
+Route::get('/repositories_settings','repositoriesController@repositories_settings');
+
+//Settings 
+Route::get('/account_settings','settingsController@account_settings');
+Route::get('/profile_settings','settingsController@profile_settings');
+Route::get('/security','settingsController@security');
+Route::get('/contact_us','settingsController@contact_us');
+
+//Post create
+
+Route::post('/user/post/store','postController@store');
+Route::get('/user/post/destroy/{id}','postController@destroy');
+Route::post('/user/post/update/{id}','postController@update');
+
+//Admin Dashboard
+Route::get('/admin','adminController@index');
+Route::get('/admin/categories/add','categoriesController@add');
+Route::get('/admin/categories/manage','subCategoryController@manage');
+Route::post('/admin/categories/store','categoriesController@store');
+Route::get('/admin/categories/destroy/{id}','categoriesController@destroy');
+Route::post('/admin/categories/update/{id}','categoriesController@update');
+Route::post('/admin/subcategories/store','subCategoryController@store');
+Route::get('/admin/subcategories/destroy/{id}','subCategoryController@destroy');
+Route::post('/admin/subcategories/update/{id}','subCategoryController@update');
+Route::post('/admin/purchase/store','productsController@store');
+
+Route::get('/admin/customerlist','customerController@customer');
+Route::get('/admin/orders/confirm','orderController@confirm');
+Route::get('/admin/orders/request','orderController@request');
+Route::get('/admin/products/sold','productsController@sold');
+Route::get('/admin/products/unsold','productsController@unsold');
+Route::get('/admin/products/manage','productsController@manage');
+Route::get('/admin/purchase/add','purchaseController@add');
+Route::get('/admin/purchase/due','purchaseController@due');
+Route::get('/admin/purchase/manage','purchaseController@manage');
+Route::get('/admin/suppliers/add','suppliersController@add');
+Route::post('/admin/suppliers/store','suppliersController@store');
+Route::get('/admin/suppliers/destroy/{id}','suppliersController@destroy');
+Route::get('/admin/suppliers/due','suppliersController@due');
+Route::get('/admin/suppliers/manage','suppliersController@manage');
+
+//storing category
+
+Route::resource('categories','CategoryController');
+
+
+
+
+
+
+Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
+Route::post('message', 'HomeController@sendMessage');
