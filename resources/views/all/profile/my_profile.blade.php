@@ -83,7 +83,7 @@
                     @elseif (auth()->user()->isFriendWith($user) && auth()->user()->id != $user->id)
                     <form action="{{ route('remove-friend', $user->id) }}" method="POST" style="float: left">
                       @csrf
-                      <button class="btn-warning">Remove Friend</button>
+                      <button class="btn-warning">Unfriend</button>
                     </form>
                     @elseif(auth()->user()->hasSentFriendRequestTo($user) && auth()->user()->id != $user->id)
                       <form action="{{ route('remove-friend-request', $user->id) }}" method="POST" style="float: left">
