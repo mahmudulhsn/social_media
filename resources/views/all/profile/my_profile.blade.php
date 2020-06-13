@@ -52,9 +52,9 @@
                   {{-- <img src="{{asset('public/profile/images/' . $users->image)}}" alt="" class="img-responsive profile-photo" /> --}}
                  
                  @endforeach
-                  <h4>{{ Auth::user()->name }}</h4>
-                  <p class="text-muted">{{ Auth::user()->email }}</p>
-                  <p class="text-muted">{{ Auth::user()->user_id }}</p>
+                  <h4>{{ $user->name }}</h4>
+                  <p class="text-muted">{{ $user->email }}</p>
+                  <p class="text-muted">{{ $user->user_id }}</p>
                 </div>
                  </form>
               </div>
@@ -68,7 +68,36 @@
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 people following him</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
+                  <li>
+                    {{-- @if (!auth()->user()->isFriendWith($user)) --}}
+                    
+                    @if (auth()->user()->hasFriendRequestFrom($user) && auth()->user()->id != $user->id)
+                    <form action="{{ route('accept-friend-request', $user->id) }}" method="POST" style="float: left; margin-right: 2px">
+                      @csrf
+                      <button class="btn-success">Accept</button>
+                    </form>
+                    <form action="{{ route('cancel-friend-request', $user->id) }}" method="POST" style="float: left">
+                      @csrf
+                      <button class="btn-danger">Cancel</button>
+                    </form>
+                    @elseif (auth()->user()->isFriendWith($user) && auth()->user()->id != $user->id)
+                    <form action="{{ route('remove-friend', $user->id) }}" method="POST" style="float: left">
+                      @csrf
+                      <button class="btn-warning">Remove Friend</button>
+                    </form>
+                    @elseif(auth()->user()->hasSentFriendRequestTo($user) && auth()->user()->id != $user->id)
+                      <form action="{{ route('remove-friend-request', $user->id) }}" method="POST" style="float: left">
+                        @csrf
+                        <button class="btn-warning">Cancel Friend Request</button>
+                      </form>
+                    @elseif(!auth()->user()->hasSentFriendRequestTo($user) && auth()->user()->id != $user->id)
+                    <form action="{{ route('send-friend-request', $user->id) }}" method="POST" style="float: left">
+                      @csrf
+                      <button class="btn-primary">Add Friend</button>
+                    </form>
+                    @endif
+                    
+                  </li>
                 </ul>
               </div>
             </div>
@@ -136,12 +165,14 @@
               @foreach($post as $all_post)
               <div class="post-content">
 
-                <img src="{{asset('public/images/' . $all_post->image)}}" width="100" height="100" class="img-responsive post-image" />
+                @if (isset($all_post->image))
+                <img src="{{ asset($all_post->image) }}" width="100" height="100" class="img-responsive post-image" />
+                @endif
                 <div class="post-container">
                   <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="user" class="profile-photo-md pull-left" />
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">{{ Auth::user()->name }}</a> <span class="following"></span></h5>
+                      <h5><a href="{{ route('single-user', $user->id) }}" class="profile-link">{{ $user->name }}</a> <span class="following"></span></h5>
                       <p class="text-muted">Published at {{ date('d M y, h:i a', strtotime($all_post->created_at)) }}</p>
                     </div>
                     <div class="reaction">

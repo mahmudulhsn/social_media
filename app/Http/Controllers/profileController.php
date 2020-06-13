@@ -50,4 +50,41 @@ class profileController extends Controller
         // $user = DB::table('users')->get();
         return view('all.profile.my_profile',compact('post', 'user'));
     }
+    public function sendFriendRequest($id)
+    {
+        $recipient = User::find($id);
+        $user = auth()->user();
+        $user->befriend($recipient);
+        return redirect()->back();
+    }
+    public function acceptFrienRequest($id)
+    {
+        $recipient = User::find($id);
+        $user = auth()->user();
+        $user->acceptFriendRequest($recipient);
+        return redirect()->back();
+    }
+
+    public function removeFriend($id)
+    {
+        $recipient = User::find($id);
+        $user = auth()->user();
+        $user->unfriend($recipient);
+        return redirect()->back();
+    }
+    public function cancelFriendRequest($id)
+    {
+        $recipient = User::find($id);
+        $user = auth()->user();
+        $user->denyFriendRequest($recipient);
+        return redirect()->back();
+    }
+    public function removeFriendRequest($id)
+    {
+        $recipient = User::find($id);
+        $user = auth()->user();
+        $user->unfriend($recipient);
+        return redirect()->back();
+    }
+    
 }

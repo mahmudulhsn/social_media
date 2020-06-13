@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Hootlex\Friendships\Traits\Friendable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Friendable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,10 +49,10 @@ class User extends Authenticatable
     public function comments() {
         return $this->hasMany('App\Comment');
     }
-    public function friends() {
-        return $this->hasMany('App\Friend', 'user_id_1');
-    }
-    public function friends1() {
-        return $this->hasMany('App\Friend', 'user_id_2');
-    }
+    // public function friends() {
+    //     return $this->hasMany('App\Friend', 'user_id_1');
+    // }
+    // public function friends1() {
+    //     return $this->hasMany('App\Friend', 'user_id_2');
+    // }
 }
