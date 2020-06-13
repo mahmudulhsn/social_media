@@ -5,7 +5,7 @@
 // });
 
 //Newsfeed Routs
-Route::get('/home','newsfeedController@index');
+Route::get('/home','newsfeedController@index')->name('homepage');
 
 //Login & Register
 Route::get('/','loginController@index');
@@ -19,18 +19,24 @@ Route::get('/all_papers','leftbarController@all_papers');
 Route::get('/all_videos','leftbarController@all_videos');
 
 
-//chatroom
-Route::get('/chatroom','chatroomController@chatroom');
 
 
-//profile
-Route::get('/users/{id}','profileController@show')->name('single-user');
-Route::get('/my_profile','profileController@my_profile');
-Route::get('/about_profile','profileController@about_profile');
-Route::get('/album','profileController@album');
-Route::get('/profile_friend','profileController@profile_friend');
-Route::get('/my_repositories','profileController@my_repositories');
-Route::post('/user/profile_pic/store','loginController@store');
+Route::group(['middleware' => 'auth'], function () {
+    //chatroom
+    Route::get('/chatroom','HomeController@index')->name('chatroom');
+    
+    Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
+    Route::post('message', 'HomeController@sendMessage');
+    
+    //profile
+    Route::get('/users/{id}','profileController@show')->name('single-user');
+    Route::get('/my_profile','profileController@my_profile');
+    Route::get('/about_profile','profileController@about_profile');
+    Route::get('/album','profileController@album');
+    Route::get('/profile_friend','profileController@profile_friend');
+    Route::get('/my_repositories','profileController@my_repositories');
+    Route::post('/user/profile_pic/store','loginController@store');
+});
 
 
 Route::post('/users/send-friend-request/{id}','profileController@sendFriendRequest')->name('send-friend-request');
