@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Post create
     Route::post('/user/post/store','postController@store')->name('post.store');
-    Route::get('/user/post/destroy/{id}','postController@destroy');
+    Route::get('/user/post/destroy/{id}','postController@destroy')->name('post.destroy');
     Route::post('/user/post/update/{id}','postController@update');
 
     // send friend request

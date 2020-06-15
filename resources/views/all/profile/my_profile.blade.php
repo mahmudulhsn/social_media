@@ -207,7 +207,7 @@
                       <a class="btn text-blue"><i class="fa fa-edit"></i></a>
                       @csrf
                       @method('DELETE')
-                      <a href="{{url('/user/post/destroy',$all_post->id)}}" type="submit" id="del" onclick="myFunction()" class="btn text-red"><i class="fa fa-trash"></i> </a>
+                      <a href="{{url('/user/post/destroy',$all_post->id)}}" type="submit" id="del" onclick="return confirm('Are you sure to delete?')" class="btn text-red"><i class="fa fa-trash"></i> </a>
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
                       <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                     </div>

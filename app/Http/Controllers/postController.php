@@ -100,14 +100,10 @@ class postController extends Controller
 
     }
 
-    public function destroy($id)
-
-    {
-    
-    $post =Post::where('id',$id)->first();
-            $post->delete();
-       return redirect()->back()->with()('Success', 'Post is successfully Deleted');
-       
+    public function destroy($id) {
+        $post =Post::where('id',$id)->first();
+        $post->delete();
+        return redirect()->back()->with('Success', 'Post is successfully Deleted');
        // Category::find($id)->delete();
        // return redirect()->back();
                         

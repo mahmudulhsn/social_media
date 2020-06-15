@@ -12,27 +12,18 @@ class newsfeedController extends Controller
 {
     public function index()
     {
-        $ids = [];
-       $friends = auth()->user()->getAcceptedFriendships();
-       if ($friends->isNotEmpty()) {
+      $ids = [];
+      $friends = auth()->user()->getFriends();
+      if ($friends->isNotEmpty()) {
          foreach ($friends as $key => $friend) {
-           if ($friend->recipient_id != auth()->user()->id) {
-             $ids[] = $friend->recipient_id;
-             
-            } else {
-              $ids[] = $friend->sender_id;
-            }
+             $ids[] = $friend->id;
+            
           }
         }else {
-          // dump('kicchu nei');
+          $ids = [0];
         }
-        $logedIn = auth()->user()->id;
-        // $friend = App\User::whereIn('id', $ids)->get();
-        // $ids = array_push();
-
-
-
-        $posts = Post::whereIn('user_id', [$ids, auth()->user()->id])->latest()->get();
+      array_push($ids, auth()->user()->id);
+      $posts = Post::whereIn('user_id', $ids)->latest()->get();
     	return view('all.main.newsfeed',compact('posts'));
     }
 
