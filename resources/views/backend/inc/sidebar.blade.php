@@ -87,7 +87,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/products/manage')}}" class="nav-link">
+                                    <a href="{{ route('repo.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Repositories</p>
                                     </a>

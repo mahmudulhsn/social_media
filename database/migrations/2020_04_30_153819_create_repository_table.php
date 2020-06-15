@@ -16,13 +16,13 @@ class CreateRepositoryTable extends Migration
         Schema::create('repository', function (Blueprint $table) {
            $table->bigIncrements('id');
             $table->string('category');
-            $table->string('title')->unique();
+            $table->string('title');
             $table->string('file');
-            $table->string('studnet_id');
+            $table->string('student_id');
             $table->string('student_name');
             $table->string('department');
-            $table->string('supervisor');
-            $table->string('date');
+            $table->string('supervisor_name');
+            $table->string('submission_date');
             $table->rememberToken();
             $table->timestamps();
         });

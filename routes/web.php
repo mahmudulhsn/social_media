@@ -63,15 +63,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/search','HomeController@search')->name('search');
 
-
-
-
+    
+    //Repositories
+    Route::get('/all_repositories','repositoriesController@all_repositories');
+    Route::get('/new_repositories','repositoriesController@new_repositories');
+    Route::post('/new_repositories','repositoriesController@store')->name('repositories.store');
+    Route::get('/repositories_settings','repositoriesController@repositories_settings');
+    Route::get('/download-repo/{id}', 'repositoriesController@downloadRepo')->name('download-repo');
 
     // admin
     Route::get('/admin/users','UserController@index')->name('user.index');
     Route::get('/admin/users/destroy/{id}','UserController@destroy')->name('user.delete');
     Route::get('/admin/posts','postController@index')->name('post.index');
     Route::get('/admin/posts/delete/{id}','postController@delete')->name('post.delete');
+
+    Route::get('/admin/repositories/manage','repositoriesController@manage')->name('repo.index');
 });
 
 
@@ -79,10 +85,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-//Repositories
-Route::get('/all_repositories','repositoriesController@all_repositories');
-Route::get('/new_repositories','repositoriesController@new_repositories');
-Route::get('/repositories_settings','repositoriesController@repositories_settings');
 
 
 

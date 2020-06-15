@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Repository;
 use Illuminate\Http\Request;
 
 class leftbarController extends Controller
@@ -26,7 +27,8 @@ class leftbarController extends Controller
 
     public function all_papers()
     {
-    	return view('all.leftbar.all_papers');
+        $repositories = Repository::latest()->get();
+    	return view('all.leftbar.all_papers', compact('repositories'));
     }
 
     public function all_videos()
