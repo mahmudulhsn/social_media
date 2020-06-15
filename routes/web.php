@@ -36,14 +36,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile_friend','profileController@profile_friend');
     Route::get('/my_repositories','profileController@my_repositories');
     Route::post('/user/profile_pic/store','loginController@store');
+
+    //Post create
+    Route::post('/user/post/store','postController@store')->name('post.store');
+    Route::get('/user/post/destroy/{id}','postController@destroy');
+    Route::post('/user/post/update/{id}','postController@update');
+
+    // send friend request
+    Route::post('/users/send-friend-request/{id}','profileController@sendFriendRequest')->name('send-friend-request');
+    Route::post('/users/accept-friend-request/{id}','profileController@acceptFrienRequest')->name('accept-friend-request');
+    Route::post('/users/cancel-friend-request/{id}','profileController@cancelFriendRequest')->name('cancel-friend-request');
+    Route::post('/users/remove-friend-request/{id}','profileController@removeFriendRequest')->name('remove-friend-request');
+    Route::post('/users/remove-friend/{id}','profileController@removeFriend')->name('remove-friend');
+
+    //Settings 
+    Route::get('/account_settings','settingsController@account_settings');
+    Route::get('/profile_settings','settingsController@profile_settings');
+    Route::post('/profile-settings/update','settingsController@updateSettings')->name('update-settings');
+    Route::get('/security','settingsController@security');
+    Route::get('/contact_us','settingsController@contact_us');
 });
 
 
-Route::post('/users/send-friend-request/{id}','profileController@sendFriendRequest')->name('send-friend-request');
-Route::post('/users/accept-friend-request/{id}','profileController@acceptFrienRequest')->name('accept-friend-request');
-Route::post('/users/cancel-friend-request/{id}','profileController@cancelFriendRequest')->name('cancel-friend-request');
-Route::post('/users/remove-friend-request/{id}','profileController@removeFriendRequest')->name('remove-friend-request');
-Route::post('/users/remove-friend/{id}','profileController@removeFriend')->name('remove-friend');
 
 
 
@@ -53,17 +67,9 @@ Route::get('/all_repositories','repositoriesController@all_repositories');
 Route::get('/new_repositories','repositoriesController@new_repositories');
 Route::get('/repositories_settings','repositoriesController@repositories_settings');
 
-//Settings 
-Route::get('/account_settings','settingsController@account_settings');
-Route::get('/profile_settings','settingsController@profile_settings');
-Route::get('/security','settingsController@security');
-Route::get('/contact_us','settingsController@contact_us');
 
-//Post create
 
-Route::post('/user/post/store','postController@store');
-Route::get('/user/post/destroy/{id}','postController@destroy');
-Route::post('/user/post/update/{id}','postController@update');
+
 
 //Admin Dashboard
 Route::get('/admin','adminController@index');

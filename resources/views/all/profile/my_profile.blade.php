@@ -17,7 +17,13 @@
     <!--Google Webfont-->
 		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
     <!--Favicon-->
-    	<link rel="shortcut icon" type="image/png" href="{{asset('public/all/images/fav.png')}}"/>
+      <link rel="shortcut icon" type="image/png" href="{{asset('public/all/images/fav.png')}}"/>
+      
+      <style>
+        .image-upload>input {
+          display: none;
+        }
+      </style>
 	</head>
   <body>
 
@@ -137,19 +143,37 @@
                 <div class="row">
                   <div class="col-md-7 col-sm-7">
                     <div class="form-group">
-                      <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="" class="profile-photo-md" />
+                      @if (isset($user->image))
+                        <img src="{{asset($user->image)}}" alt="user" class="profile-photo-md pull-left" />
+                      @else
+                        <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                      @endif
                       <textarea name="body" id="body" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                     </div>
                     <span class="text-danger">{{ $errors->has('body') ? $errors->first('body') : '' }}</span>
-                  </div>
-                  <div class="col-md-7 col-sm-7">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                   </div>
+                  {{-- <div class="col-md-7 col-sm-7">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                  </div> --}}
                   <div class="col-md-5 col-sm-5">
                     <div class="tools">
                       <ul class="publishing-tools list-inline">
                        <li><a href="#"><i class="ion-compose"></i></a></li>
-                        <li><input type="file" name="image"><i class="ion-images"></i></li>
+                        {{-- <li><input type="file" name="image"><i class="ion-images"></i></li> --}}
+                        
+                        <li>
+                          <a href="#">
+                            <span class="image-upload">
+                              <label for="file-input">
+                                <i class="ion-images"></i>
+                              </label>
+                            
+                              {{-- <input  type="file" /> --}}
+                              <input id="file-input" type="file" name="image">
+                            </span>
+                          </a>
+                        </li>
                         <span class="text-danger">{{ $errors->has('image') ? $errors->first('image') : '' }}</span>
                         <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                       </ul>
@@ -169,7 +193,11 @@
                 <img src="{{ asset($all_post->image) }}" width="100" height="100" class="img-responsive post-image" />
                 @endif
                 <div class="post-container">
-                  <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                  @if (isset($user->image))
+                    <img src="{{asset($user->image)}}" alt="user" class="profile-photo-md pull-left" />
+                  @else
+                    <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                  @endif
                   <div class="post-detail">
                     <div class="user-info">
                       <h5><a href="{{ route('single-user', $user->id) }}" class="profile-link">{{ $user->name }}</a> <span class="following"></span></h5>

@@ -18,6 +18,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="{{asset('public/all/images/fav.png')}}"/>
+      @yield('extra-css')
 	</head>
   <body>
 

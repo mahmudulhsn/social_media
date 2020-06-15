@@ -1,30 +1,58 @@
  @extends('all.master')
+ @section('extra-css')
+ <style>
+  .image-upload>input {
+    display: none;
+  }
+</style>
+ @endsection
 @section('content')
 
 
 <div class="col-md-7">
 
-  <div class="create-post">
+        <div class="create-post">
+            <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+              @csrf
               <div class="row">
                 <div class="col-md-7 col-sm-7">
                   <div class="form-group">
-                    <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                    @if (isset(auth()->user()->image))
+                      <img src="{{asset(auth()->user()->image)}}" alt="user" class="profile-photo-md pull-left" />
+                    @else
+                      <img src="{{asset('back/images/user/default.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                    @endif
+                    <textarea name="body" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-5">
+                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                   <div class="tools">
                     <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-compose"></i></a></li>
-                      <li><a href="#"><i class="ion-images"></i></a></li>
+                     <li><a href="#"><i class="ion-compose"></i></a></li>
+                      {{-- <li><input type="file" name="image"><i class="ion-images"></i></li> --}}
+                      
+                      <li>
+                        <a href="#">
+                          <span class="image-upload">
+                            <label for="file-input">
+                              <i class="ion-images"></i>
+                            </label>
+                          
+                            {{-- <input  type="file" /> --}}
+                            <input id="file-input" type="file" name="image">
+                          </span>
+                        </a>
+                      </li>
+                      <span class="text-danger">{{ $errors->has('image') ? $errors->first('image') : '' }}</span>
                       <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="#"><i class="ion-map"></i></a></li>
                     </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
+                    <button class="btn btn-primary pull-right">Post</button>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
+        </div>
           
           @foreach ($posts as $post)
           <div class="post-content">
@@ -32,7 +60,11 @@
             <img src="{{ asset($post->image) }}" alt="post-image" class="img-responsive post-image" />
             @endif
               <div class="post-container">
-                <img src="{{asset('public/all/images/users/user-5.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                @if (isset($post->user->image))
+                  <img src="{{($post->user->image)}}" alt="user" class="profile-photo-md pull-left" />
+                @else
+                  <img src="{{asset('back/images/user/default.jpg')}}" alt="user" class="profile-photo-md pull-left" />
+                @endif
                 <div class="post-detail">
                   <div class="user-info">
                     <h5><a href="{{ route('single-user', $post->user->id) }}" class="profile-link">{{ $post->user->name}}</a> <span class="following">following</span></h5>
