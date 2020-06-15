@@ -13,8 +13,8 @@
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-people"></i><div><a href="{{ route('single-user', Auth::user()->id) }}">My Profile</a></div></li>
-              <li><i class="icon ion-ios-people"></i><div><a href="{{URL::to('/people_nearby')}}">People Nearby</a></div></li>
-              <li><i class="icon ion-ios-people-outline"></i><div><a href="{{URL::to('/people_nearby')}}">Friends</a></div></li>
+              {{-- <li><i class="icon ion-ios-people"></i><div><a href="{{ route('friend-request') }}">People Nearby</a></div></li> --}}
+              <li><i class="icon ion-ios-people-outline"></i><div><a href="{{ route('friends') }}">Friends</a></div></li>
               <li><i class="icon ion-chatboxes"></i><div><a href="{{URL::to('/chatroom')}}">Messages</a></div></li>
               <li><i class="icon ion-ios-paper"></i><div><a href="{{URL::to('/all_papers')}}">Papers</a></div></li>
               <li><i class="icon ion-images"></i><div><a href="{{URL::to('/all_images')}}">Images</a></div></li>

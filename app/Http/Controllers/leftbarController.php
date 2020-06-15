@@ -8,7 +8,13 @@ class leftbarController extends Controller
 {
     public function people_nearby()
     {
+        // $friendList = auth()->user()->getAllFriendships();
     	return view('all.leftbar.people_nearby');
+    }
+    public function friendRequest()
+    {
+        // $friendList = auth()->user()->getAllFriendships();
+    	return view('all.leftbar.friend-request');
     }
 
     public function all_images()

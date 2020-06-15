@@ -12,11 +12,7 @@ Route::get('/','loginController@index');
 Route::get('/registration','loginController@register');
 Route::get('/contact','loginController@contact');
 
-//Left Sidebars Items
-Route::get('/people_nearby','leftbarController@people_nearby');
-Route::get('/all_images','leftbarController@all_images');
-Route::get('/all_papers','leftbarController@all_papers');
-Route::get('/all_videos','leftbarController@all_videos');
+
 
 
 
@@ -55,6 +51,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile-settings/update','settingsController@updateSettings')->name('update-settings');
     Route::get('/security','settingsController@security');
     Route::get('/contact_us','settingsController@contact_us');
+
+    //Left Sidebars Items
+    Route::get('/friends','leftbarController@people_nearby')->name('friends');
+    Route::get('/friend-requests','leftbarController@friendRequest')->name('friend-request');
+    Route::get('/all_images','leftbarController@all_images');
+    Route::get('/all_papers','leftbarController@all_papers');
+    Route::get('/all_videos','leftbarController@all_videos');
 });
 
 

@@ -33,7 +33,7 @@
               {{-- @php
                   dd(auth()->user()->getAcceptedFriendships());
               @endphp --}}
-              @foreach (auth()->user()->getAcceptedFriendships() as $friend)
+              @foreach (auth()->user()->getPendingFriendships() as $friend)
               @php
               if ($friend->recipient_id != auth()->user()->id) {
                 $user = App\User::find($friend->recipient_id);
@@ -58,10 +58,31 @@
                     <p class="text-muted">500m away</p> --}}
                   </div>
                   <div class="col-md-3 col-sm-3">
+                    @if (auth()->user()->hasFriendRequestFrom($user) && auth()->user()->id != $user->id)
+                    <form action="{{ route('accept-friend-request', $user->id) }}" method="POST" style="float: left; margin-right: 2px">
+                      @csrf
+                      <button class="btn-success">Accept</button>
+                    </form>
+                    <form action="{{ route('cancel-friend-request', $user->id) }}" method="POST" style="float: left">
+                      @csrf
+                      <button class="btn-danger">Cancel</button>
+                    </form>
+                    @elseif (auth()->user()->isFriendWith($user) && auth()->user()->id != $user->id)
                     <form action="{{ route('remove-friend', $user->id) }}" method="POST" style="float: left">
                       @csrf
                       <button class="btn-warning">Unfriend</button>
                     </form>
+                    @elseif(auth()->user()->hasSentFriendRequestTo($user) && auth()->user()->id != $user->id)
+                      <form action="{{ route('remove-friend-request', $user->id) }}" method="POST" style="float: left">
+                        @csrf
+                        <button class="btn-warning">Cancel Friend Request</button>
+                      </form>
+                    @elseif(!auth()->user()->hasSentFriendRequestTo($user) && auth()->user()->id != $user->id)
+                    <form action="{{ route('send-friend-request', $user->id) }}" method="POST" style="float: left">
+                      @csrf
+                      <button class="btn-primary">Add Friend</button>
+                    </form>
+                    @endif
                   </div>
                 </div>
               </div>

@@ -17,7 +17,8 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown"><a href="{{URL::to('/home')}}">Home</a></li>
-              <li class="dropdown"><a href="{{URL::to('/my_profile')}}">Friend Requests</a></li>
+              <li class="dropdown"><a href="{{ route('friends') }}">Friends</a></li>
+              <li class="dropdown"><a href="{{ route('friend-request') }}">Friends Request</a></li>
               <li class="dropdown"><a href="{{URL::to('/chatroom')}}">Messages</a></li>
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Repositories <span><img src="{{asset('public/all/images/down-arrow.png')}}" alt="" /></span></a>
