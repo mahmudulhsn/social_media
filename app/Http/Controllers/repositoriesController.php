@@ -23,7 +23,7 @@ class repositoriesController extends Controller
     	$validator = Validator::make(request()->all(), [
             'category'   => 'required',
             'title'      => 'required',
-            'file'   => 'required',
+            'file'   => 'required| mimes:pdf',
             'student_name'  => 'required',
             'department'    => 'required',
             'supervisor_name' => 'required',

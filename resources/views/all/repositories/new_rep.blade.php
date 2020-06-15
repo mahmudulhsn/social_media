@@ -1,10 +1,9 @@
 @extends('all.master')
 @section('content')
 <div class="form col-md-7">
-    dfdf
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <h3>{{ $message }}</h3>
+    @if(session()->has('message'))
+    <div class="text-center text text-{{ session('type') }}">
+        <h5 class="text text-{{ session('type') }}">{{ session('message') }}</h5>
     </div>
     @endif
     <form action="{{ route('repositories.store') }}" method="post" enctype="multipart/form-data">
