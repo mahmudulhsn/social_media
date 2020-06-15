@@ -2,7 +2,8 @@
 @section('content')
 
 <div class="form col-md-7">
-    <form action="{{ route('update-settings') }}" method="post" enctype="multipart/form-data">
+  <img src="{{ asset(auth()->user()->image ) }}"  height="200px" width="200px" alt="">
+  <form action="{{ route('update-settings') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label for="exampleInputEmail1">Change Profile Picture</label>
