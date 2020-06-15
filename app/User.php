@@ -4,12 +4,35 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Hootlex\Friendships\Traits\Friendable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Friendable;
+    use Notifiable, Friendable, SearchableTrait;
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'name' => 10,
+            'user_id' => 9,
+            'phone' => 8,
+            'email' => 7,
+        ]
+    ];
+
 
     /**
      * The attributes that are mass assignable.

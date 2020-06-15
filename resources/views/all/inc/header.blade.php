@@ -51,10 +51,12 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form navbar-right hidden-sm">
+            <form class="navbar-form navbar-right hidden-sm" action="{{ route('search') }}" method="POST">
+              @csrf
               <div class="form-group">
                 <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, papers, categories">
+                <input type="text" class="form-control" name="search" placeholder="Search friends, papers, categories">
+                {{-- <input type="submit" value="Search"> --}}
               </div>
             </form>
           </div><!-- /.navbar-collapse -->

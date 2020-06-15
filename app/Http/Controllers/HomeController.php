@@ -88,5 +88,13 @@ class HomeController extends Controller
 
 
     }
+    /**
+     * return the search result 
+     */
+    public function search(Request $request)
+    {
+        $users = User::search($request->search)->get();
+        return view('all.friend_request.search-friend',compact('users'));
+    }
 
 }

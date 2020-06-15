@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/all_images','leftbarController@all_images');
     Route::get('/all_papers','leftbarController@all_papers');
     Route::get('/all_videos','leftbarController@all_videos');
+
+    Route::post('/search','HomeController@search')->name('search');
 });
 
 
