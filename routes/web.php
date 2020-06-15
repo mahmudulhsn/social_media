@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     //profile
     Route::get('/users/{id}','profileController@show')->name('single-user');
+    // Route::get('/users/images/{id}','profileController@imageShow')->name('user-image');
     Route::get('/my_profile','profileController@my_profile');
     Route::get('/about_profile','profileController@about_profile');
     Route::get('/album','profileController@album');

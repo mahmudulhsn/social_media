@@ -50,6 +50,16 @@ class profileController extends Controller
         // $user = DB::table('users')->get();
         return view('all.profile.my_profile',compact('post', 'user'));
     }
+
+    // public function userImage($id)
+    // {
+    //     $post = Post::where('user_id', $id)->latest()->get();
+    //     $user = User::find($id);
+    //     // $post = DB::table('posts')->get()->sortByDesc('id');
+    //     // $user = DB::table('users')->get();
+    //     return view('all.leftbar.all_images',compact('post', 'user'));
+    // }
+
     public function sendFriendRequest($id)
     {
         $recipient = User::find($id);

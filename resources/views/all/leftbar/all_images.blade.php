@@ -2,56 +2,34 @@
 @section('content')
 <div class="col-md-7">
 
-            <!-- Post Create Box
-            ================================================= -->
-            <div class="create-post">
-              <div class="row">
-                <div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <img src="{{asset('public/all/images/users/user-1.jpg')}}" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                  </div>
-                </div>
-                <div class="col-md-5 col-sm-5">
-                  <div class="tools">
-                    <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-compose"></i></a></li>
-                      <li><a href="#"><i class="ion-images"></i></a></li>
-                      <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="#"><i class="ion-map"></i></a></li>
-                    </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
-                  </div>
-                </div>
-              </div>
-            </div><!-- Post Create Box End -->
-
             <!-- Media
             ================================================= -->
             <div class="media">
               <div class="row js-masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": true }'>
                 <div class="grid-sizer col-md-6 col-sm-6"></div>
+                
+                @foreach ($posts as $post)
                 <div class="grid-item col-md-6 col-sm-6">
                   <div class="media-grid">
                     <div class="img-wrapper" data-toggle="modal" data-target=".modal-1">
-                      <img src="{{asset('public/all/images/post-images/6.jpg')}}" alt="" class="img-responsive post-image" />
+                      <img src="{{asset($post->image)}}" alt="" class="img-responsive post-image" />
                     </div>
-                    <div class="media-info">
+                    {{-- <div class="media-info">
                       <div class="reaction">
                         <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 63</a>
                         <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 12</a>
                       </div>
                       <div class="user-info">
-                        <img src="{{asset('public/all/images/users/user-8.jpg')}}" alt="" class="profile-photo-sm pull-left" />
+                        <img src="{{asset($post->image)}}" alt="" class="profile-photo-sm pull-left" />
                         <div class="user">
                           <h6><a href="#" class="profile-link">Richard Bell</a></h6>
                           <a class="text-green" href="#">Friend</a>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
 
                     <!--Popup-->
-                    <div class="modal fade modal-1" tabindex="-1" role="dialog" aria-hidden="true">
+                    {{-- <div class="modal fade modal-1" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="post-content">
@@ -89,11 +67,13 @@
                           </div>
                         </div>
                       </div>
-                    </div><!--Popup End-->
-
+                    </div><!--Popup End--> --}}
+                   
                   </div>
                 </div>
-                <div class="grid-item col-md-6 col-sm-6">
+                @endforeach
+
+                {{-- <div class="grid-item col-md-6 col-sm-6">
                   <div class="media-grid">
                     <div class="img-wrapper" data-toggle="modal" data-target=".modal-2">
                       <img src="{{asset('public/all/images/post-images/3.jpg')}}" alt="" class="img-responsive post-image" />
@@ -587,7 +567,7 @@
                       </div>
                     </div><!--Popup End-->
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
           </div>

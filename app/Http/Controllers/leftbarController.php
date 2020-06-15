@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class leftbarController extends Controller
@@ -19,7 +20,8 @@ class leftbarController extends Controller
 
     public function all_images()
     {
-    	return view('all.leftbar.all_images');
+        $posts = Post::where('user_id', auth()->user()->id)->latest()->get();
+    	return view('all.leftbar.all_images', compact('posts'));
     }
 
     public function all_papers()
