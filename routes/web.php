@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/search','HomeController@search')->name('search');
 
+    // message
+    Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
+    Route::post('message', 'HomeController@sendMessage');
+
     
     //Repositories
     Route::get('/all_repositories','repositoriesController@all_repositories');
@@ -78,8 +82,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/posts/delete/{id}','postController@delete')->name('post.delete');
 
     Route::get('/admin/repositories/manage','repositoriesController@manage')->name('repo.index');
+
 });
 
+Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
 
@@ -128,7 +135,4 @@ Route::resource('categories','CategoryController');
 
 
 
-Auth::routes();
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/message/{id}', 'HomeController@getMessage')->name('message');
-Route::post('message', 'HomeController@sendMessage');
+
