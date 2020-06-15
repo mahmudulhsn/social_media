@@ -189,7 +189,10 @@
                                 <a class="nav-link" href="{{ route('homepage') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/my_profile')}}">Friend Requests</a>
+                                <a class="nav-link" href="{{ route('friends') }}">Friends <span style="color: green; font-weight: bold;">({{ auth()->user()->getFriendsCount() }})</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('friend-request') }}">Friends Request <span style="color: yellow">({{ auth()->user()->getPendingFriendships()->count() }})</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('chatroom') }}">Message</a>

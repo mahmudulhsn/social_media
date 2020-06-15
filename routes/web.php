@@ -4,8 +4,6 @@
 //     return view('welcome');
 // });
 
-//Newsfeed Routs
-Route::get('/home','newsfeedController@index')->name('homepage');
 
 //Login & Register
 Route::get('/','loginController@index');
@@ -18,6 +16,9 @@ Route::get('/contact','loginController@contact');
 
 
 Route::group(['middleware' => 'auth'], function () {
+    
+    //Newsfeed Routs
+    Route::get('/home','newsfeedController@index')->name('homepage');
     //chatroom
     Route::get('/chatroom','HomeController@index')->name('chatroom');
     
