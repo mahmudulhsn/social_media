@@ -62,6 +62,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/all_videos','leftbarController@all_videos');
 
     Route::post('/search','HomeController@search')->name('search');
+
+
+
+
+
+    // admin
+    Route::get('/admin/users','UserController@index')->name('user.index');
+    Route::get('/admin/users/destroy/{id}','UserController@destroy')->name('user.delete');
+    Route::get('/admin/posts','postController@index')->name('post.index');
+    Route::get('/admin/posts/delete/{id}','postController@delete')->name('post.delete');
 });
 
 
@@ -90,7 +100,7 @@ Route::get('/admin/subcategories/destroy/{id}','subCategoryController@destroy');
 Route::post('/admin/subcategories/update/{id}','subCategoryController@update');
 Route::post('/admin/purchase/store','productsController@store');
 
-Route::get('/admin/customerlist','customerController@customer');
+// Route::get('/admin/customerlist','customerController@customer');
 Route::get('/admin/orders/confirm','orderController@confirm');
 Route::get('/admin/orders/request','orderController@request');
 Route::get('/admin/products/sold','productsController@sold');
@@ -101,9 +111,11 @@ Route::get('/admin/purchase/due','purchaseController@due');
 Route::get('/admin/purchase/manage','purchaseController@manage');
 Route::get('/admin/suppliers/add','suppliersController@add');
 Route::post('/admin/suppliers/store','suppliersController@store');
-Route::get('/admin/suppliers/destroy/{id}','suppliersController@destroy');
+// Route::get('/admin/users/destroy/{id}','suppliersController@destroy')->name('user.delete');
+
+// Route::get('/portfolio/delete/{id}', 'PortfolioController@delete')->name('portfolio.delete');
 Route::get('/admin/suppliers/due','suppliersController@due');
-Route::get('/admin/suppliers/manage','suppliersController@manage');
+// Route::get('/admin/suppliers/manage','suppliersController@manage');
 
 //storing category
 

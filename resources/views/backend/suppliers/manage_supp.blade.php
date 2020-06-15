@@ -7,20 +7,25 @@
 
 
                     <div class="content-header">
-                        <h6 class="m-0 text-color">Home > Supplier > <span>Manage Supplier</span></h6>
+                        <h6 class="m-0 text-color">Home > User > <span>Manage User</span></h6>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Supplier</h5>
+                            <h5 class="card-title">Users</h5>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="table-responsive">
+                                @if(session()->has('message'))
+                                    <div class="text-center text text-{{ session('type') }}">
+                                        <h5 class="text text-{{ session('type') }}">{{ session('message') }}</h5>
+                                    </div>
+                                @endif
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Supplier ID</th>
+                                            <th>User ID</th>
                                             <th>Name</th>
                                             <th>Contact</th>
                                             <th>Email</th>
@@ -29,25 +34,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($supp as $all_supp)
+                                        @foreach($users as $user)
                                         <tr>
-                                            <td>{{$all_supp->id}}</td>
-                                            <td>{{$all_supp->sup_name}}</td>
-                                            <td>{{$all_supp->sup_phone}}</td>
-                                            <td>{{$all_supp->sup_email}}</td>
-                                            <td>{{$all_supp->sup_address}}</td>
+                                            <td>{{$user->user_id}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->phone}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->address}}</td>
                                             <td class="text-center">
-                                            <a href="" class="action-btn">Confirm</a>
-
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="{{url('/admin/suppliers/destroy',$all_supp->id)}}" id="del" onclick="myFunction()" class="action-btn"><i class="fas fa-times"></i></a>
-                                                <a href="" class="action-btn" data-toggle="modal" data-target="#exampleModal{{$all_supp->id}}"><i class="far fa-eye"></i></a>
+                                                <a href="{{ route('user.delete', $user->id) }}" class="on-default btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
                                             </td>
                                         </tr>
-                                        <div class="modal fade" id="exampleModal{{$all_supp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        @endforeach
+                                        <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        {{-- <div class="modal-content">
                              <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -58,32 +59,32 @@
                                                     <div id="printableArea" class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
-                                         <strong>Supplier ID:</strong>
-                                         {{$all_supp->id}}
+                                         <strong>User ID:</strong>
+                                         {{$user->id}}
                                         </div>
                                     </div>
                                      <div class="col-xs-12 col-sm-12 col-md-12">
                                       <div class="form-group">
                                            <strong>Name:</strong>
-                                        {{$all_supp->sup_name}}
+                                        {{$user->sup_name}}
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
                                          <strong>Contact:</strong>
-                                        {{$all_supp->sup_phone}}
+                                        {{$user->sup_phone}}
                                         </div>
                                     </div>
                                      <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
                                          <strong>Email:</strong>
-                                        {{$all_supp->sup_email}}
+                                        {{$user->sup_email}}
                                      </div>
                                                              </div>
                                  <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                          <strong>Address:</strong>
-                                         {{$all_supp->sup_address}}
+                                         {{$user->sup_address}}
                 
                                      </div>
                                     </div>
@@ -92,10 +93,9 @@
                             <button onclick="printDiv('printableArea')" class="btn btn-primary">Print</button>
                         </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
- @endforeach
             </tbody>
         </table>
     </div>

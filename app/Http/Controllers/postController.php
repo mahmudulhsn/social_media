@@ -16,7 +16,11 @@ class postController extends Controller
     {
         $this->middleware('auth');
     }
-
+    public function index()
+    {
+        $posts = Post::latest()->get();
+        return view('backend.posts.index', compact('posts'));
+    }
     public function store(Request $request) {
         $validator = Validator::make(request()->all(), [
             'body' => 'required',
@@ -108,6 +112,7 @@ class postController extends Controller
        // return redirect()->back();
                         
     }
+    
 
     public function update(Request $request , $id)
     {  
@@ -121,6 +126,13 @@ class postController extends Controller
          return redirect()->back();
     }
 
+    public function delete($id) {
+        $post =Post::find($id);
+        $post->delete();
 
+        session()->flash('type', 'success');
+        session()->flash('message', 'Post Deleted Successfully.');
+        return redirect()->back();              
+    }
 
 }

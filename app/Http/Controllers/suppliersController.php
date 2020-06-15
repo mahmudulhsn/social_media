@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\Supplier;
+use App\User;
 
 class suppliersController extends Controller
 {
@@ -25,12 +26,9 @@ class suppliersController extends Controller
     	return view('backend.suppliers.due_supp');
     } 
 
-    public function manage()
-
-    {
-        $supp = DB::table('suppliers')->get();
-
-    	return view('backend.suppliers.manage_supp',compact('supp'));
+    public function manage() {
+        $users = User::latest()->get();
+    	return view('backend.suppliers.manage_supp',compact('users'));
     }
 
     public function store(Request $request)
@@ -46,14 +44,10 @@ class suppliersController extends Controller
     }
 
 
-    public function destroy($id)
-
-    {
-    $supplier =Supplier::where('id',$id)->first();
-            $supplier->delete();
-            return redirect()->back();
-       
-                        
+    public function destroy($id) {
+        $user =User::where('id',$id)->first();
+        $user->delete();
+        return redirect()->back();              
     }
 
     public function update(Request $request , $id)

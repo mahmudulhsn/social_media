@@ -118,7 +118,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{url('/admin/customerlist')}}" class="nav-link">
+                            <a href="{{ route('post.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     All Post 
@@ -143,7 +143,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/suppliers/manage')}}" class="nav-link">
+                                    <a href="{{ route('user.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage User</p>
                                     </a>
